@@ -4,35 +4,33 @@ document.addEventListener('DOMContentLoaded', () => {
 	window.addEventListener('scroll', controlScroll)
 
 	function controlScroll() {
-		const scrolltop = document.body.scrollTop || document.documentElement.scrollTop
-		let display = toTop.style.display
-		if (scrolltop > 400 || scrolltop > 400) {
+		const st = document.body.scrollTop || document.documentElement.scrollTop
+		const display = toTop.style.display
+		const cl = toTop.classList
+		if (st > 300) {
 			toTop.style.display = 'block'
-			toTop.classList.remove('hide')
-			toTop.classList.add('show')
-			setTimeout(() => {
-				toTop.classList.add('rotate')
-			}, 2100)
+			cl.remove('hide')
+			cl.add('show')
+			setTimeout(() => {cl.add('rotate')}, 2100)
 	  } else {
 			if (display === 'block') {
-				toTop.classList.remove('show')
-				toTop.classList.add('hide')
+				cl.remove('show')
+				cl.add('hide')
 				setTimeout(() => {
-					toTop.classList.remove('rotate')
+					cl.remove('rotate')
 					toTop.style.display = 'none'
 				}, 2000)
 			}
 	  }
 	}
 
-	toTop.addEventListener('click', e => {
+	toTop.addEventListener('click', () => {
 		document.body.scrollTop = 0
 		document.documentElement.scrollTop = 0
 	})
 
 	const ej01 = (years) => {
-		const year = 365
-		return years * year
+		return years * 365
 	}
 	const ej02 = (hours) => {
 		return hours * 60 * 60
@@ -41,27 +39,24 @@ document.addEventListener('DOMContentLoaded', () => {
 		return arr.join(' ')
 	}
 	const ej04 = (arr = [1, 2, 3, 4, 5]) => {
+		const len = arr.length - 1
 		const invert = []
-		for (let i = arr.length - 1; i >= 0; i--) {
+		for (let i = len; i >= 0; i--) {
 			invert.push(arr[i])
 		}
 		return invert
 	}
 	const ej05 = (arr = [1, 2, 3, 4, 5]) => {
-		const invert = []
-		for (let i = arr.length - 1; i >= 0; i--) {
-			invert.push(arr[i])
-		}
-		return invert
+		return arr.reduce((acc, cur) => [cur, ...acc], [])
 	}
-	const ej06 = (arr1 = [1,2,3], arr2 = [4,5,6]) => {
+	const ej06 = (arr1 = [1, 2, 3], arr2 = [4, 5, 6]) => {
 		return arr1.concat(arr2)
 	}
-	const ej07 = (arr = [1,2,3,4], el = 0) => {
+	const ej07 = (arr = [1, 2, 3, 4], el = 0) => {
 		return arr.includes(el)
 	}
 	const ej08 = (str = 'esto es una cadena') => {
-		return str[str.length - 1] === 'b'
+		return str.charAt(str.length - 1) === 'b'
 	}
 	const ej09 = (str = 'esta cadena es de prueba') => {
 		if (str.length < 6) {
@@ -73,9 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		return `${str1.slice(2)} ${str2.slice(2)}`
 	}
 	const ej11 = (num1 = 20, num2 = 90) => {
-		const n1 = num1 > 100 ? num1 - 100 : 100 - num1
-		const n2 = num2 > 100 ? num2 - 100 : 100 - num2
-		return n1 > n2 ? num2 : num1
+		return Math.abs(num1 - 100) > Math.abs(num2 - 100) ? num2 : num1
 	}
 
 	document.addEventListener('click', e => {
